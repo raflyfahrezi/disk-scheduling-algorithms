@@ -36,11 +36,11 @@ const Home = () => {
             <div className="card">
                 <div className="card__content">
                     <label className="montserrat">Track : </label>
-                    <input type="text" placeholder="12 32 44 56 78" id="track"></input>
+                    <input type="text" placeholder="cth : 12 32 44 56 78" id="track"></input>
                 </div>
                 <div className="card__content">
                     <label className="montserrat">Head : </label>
-                    <input type="text" placeholder="100" id="head"></input>
+                    <input type="text" placeholder="cth : 100" id="head"></input>
                 </div>
                 <div className="card__button">
                     <button id="calculate" onClick={ calculateHandler }>Calculate</button>
@@ -104,7 +104,7 @@ const Home = () => {
                             display: grid;
                             place-items: center;
 
-                            margin: 100px auto 0 auto;
+                            margin: 100px auto 50px auto;
                         }
 
                         .chart__content {

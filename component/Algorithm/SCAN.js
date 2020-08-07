@@ -5,6 +5,7 @@ import Chart from '../Chart/Chart'
 import DescendingSort from './Function/descendingSort'
 import AscendingSort from './Function/ascendingSort'
 import TimeDeviation from './Function/calculateTimeDeviation'
+import GetSumOfNumberFromArray from './Function/getSumOfNumberFromArray'
 
 const SCAN = ({ dataSet }) => {
     const [
@@ -15,9 +16,14 @@ const SCAN = ({ dataSet }) => {
         getTime, setTime
     ] = useState([])
 
+    const [
+        getAverageSeekLength, setAverageSeekLength
+    ] = useState(0)
+
     useEffect(() => {
         let finalDataSet = [...dataSet]
-        let timeDeviation = []
+        let timeDeviation = {}
+        let averageSeekLength = 0 
 
         const headDataSet = finalDataSet.shift()
         const dataSetUpperHead = []
@@ -40,15 +46,21 @@ const SCAN = ({ dataSet }) => {
 
         timeDeviation = TimeDeviation(finalDataSet)
 
-        timeDeviation.unshift(' ')
+        timeDeviation.timeDeviationString.unshift(' ')
+
+        averageSeekLength = GetSumOfNumberFromArray(timeDeviation.timeDeviationNumber) / timeDeviation.timeDeviationNumber.length
 
         setFinalDataSet(finalDataSet)
-        setTime(timeDeviation)
+        setAverageSeekLength(averageSeekLength.toFixed(1))
+        setTime(timeDeviation.timeDeviationString)
     }, [ dataSet ])
 
     return (
         <div className="chart__container">
             <Chart dataSet={ getFinalDataSet } title={ "SCAN" } timeDeviation={ getTime }/>
+            <div className="chart__averageTimeDeviation">
+                <p className="montserrat averageTimeDeviation">Average Seek Length : { getAverageSeekLength }</p>
+            </div>
             <style jsx>
                 {
                     `
@@ -57,6 +69,11 @@ const SCAN = ({ dataSet }) => {
                             max-width: 700px;
 
                             margin-top: 50px;
+                        }
+
+                        .averageTimeDeviation {
+                            margin-top: 5px;
+                            text-align: center
                         }
                     `
                 }
