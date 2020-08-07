@@ -1,8 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
+import Head from 'next/head'
 
 import FIFO from '../Algorithm/FIFO'
 import SSTF from '../Algorithm/SSTF'
 import CSCAN from '../Algorithm/CSCAN'
+import SCAN from '../Algorithm/SCAN'
 
 const Home = () => {
     const [
@@ -25,6 +27,9 @@ const Home = () => {
 
     return (
         <div>
+            <Head>
+                <title>Disk Scheduling Algorithms</title>
+            </Head>
             <div className="header">
                 <p className="montserrat title" id="title">Proses Penjadwalan Disk</p>
             </div>
@@ -48,6 +53,7 @@ const Home = () => {
                     <Fragment>
                         <FIFO dataSet={ getDataSet } />
                         <SSTF dataSet={ getDataSet } />
+                        <SCAN dataSet={ getDataSet }/>
                         <CSCAN dataSet={ getDataSet } />
                     </Fragment>
                 ) }

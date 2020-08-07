@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 
 import Chart from '../Chart/Chart'
 
+import DescendingSort from './Function/descendingSort'
 import AscendingSort from './Function/ascendingSort'
 import TimeDeviation from './Function/calculateTimeDeviation'
 
-const CSCAN = ({ dataSet }) => {
+const SCAN = ({ dataSet }) => {
     const [
-        getFinalDataSet, setFinalDataSet
+        getFinalDataSet, setFinalDataSet 
     ] = useState([])
 
     const [
@@ -19,8 +20,8 @@ const CSCAN = ({ dataSet }) => {
         let timeDeviation = []
 
         const headDataSet = finalDataSet.shift()
-        const dataSetBelowHead = []
         const dataSetUpperHead = []
+        const dataSetBelowHead = []
 
         for (let i = 0; i < finalDataSet.length; i++) {
             if (parseInt(finalDataSet[i]) > parseInt(headDataSet)) {
@@ -31,7 +32,7 @@ const CSCAN = ({ dataSet }) => {
         }
 
         AscendingSort(dataSetUpperHead)
-        AscendingSort(dataSetBelowHead)
+        DescendingSort(dataSetBelowHead)
 
         finalDataSet = dataSetUpperHead.concat(dataSetBelowHead)
 
@@ -47,7 +48,7 @@ const CSCAN = ({ dataSet }) => {
 
     return (
         <div className="chart__container">
-            <Chart dataSet={ getFinalDataSet } title={ "CSCAN" } timeDeviation={ getTime }/>
+            <Chart dataSet={ getFinalDataSet } title={ "SCAN" } timeDeviation={ getTime }/>
             <style jsx>
                 {
                     `
@@ -64,4 +65,4 @@ const CSCAN = ({ dataSet }) => {
     )
 }
 
-export default CSCAN
+export default SCAN

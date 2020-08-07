@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react'
 
 import Chart from '../Chart/Chart'
-import GetHighestValueFromArray from './Function/GetHighestValueFromArray'
 
-const SSTF = ({ dataSet, head }) => {
+import AscendingSort from './Function/ascendingSort'
+import DescendingSort from './Function/descendingSort'
+import TimeDeviation from './Function/calculateTimeDeviation'
+
+const SSTF = ({ dataSet }) => {
 
     useEffect(() => {
-        const dataSetTemp = [...dataSet]
-        const headTemp = dataSetTemp.shift()
-        // const highestValue = GetHighestValueFromArray(dataSet)
+        let finalDataSet = [...dataSet]
+        let timeDeviation = []
 
-        // for (let i = 0; i < dataSetTemp.length; i++) {
+        const headDataSet = finalDataSet.shift()
+        const dataSetBelowHead = []
+        const dataSetUpperHead = []
 
-        // }
+        for (let i = 0; i < finalDataSet.length; i++) {
+            if (parseInt(finalDataSet[i]) > parseInt(headDataSet)) {
+                dataSetUpperHead.push(finalDataSet[i])
+            } else {
+                dataSetBelowHead.push(finalDataSet[i])
+            }
+        }
     })
 
     return (
