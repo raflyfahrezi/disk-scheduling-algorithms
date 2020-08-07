@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 
 import FIFO from '../Algorithm/FIFO'
+import SSTF from '../Algorithm/SSTF'
+import CSCAN from '../Algorithm/CSCAN'
 
 const Home = () => {
     const [
@@ -11,15 +13,14 @@ const Home = () => {
         const track = document.getElementById('track')
         const head = document.getElementById('head')
 
-        const finalValue = track.value.split(' ')
-        finalValue.unshift(head.value)
+        const dataSet = track.value.split(' ')
+        dataSet.unshift(head.value)
 
-        console.log(finalValue)
-        setDataSet(finalValue)
+        setDataSet(dataSet)
     }
 
     useEffect(() => {
-        console.log('Data Changed')
+        // console.log(getDataSet)
     }, [getDataSet])
 
     return (
@@ -42,9 +43,13 @@ const Home = () => {
             </div>
             <div className="chart__container">
                 { getDataSet.length <= 0 ? (
-                    <div></div>
+                    <Fragment/>
                 ) : (
-                    <FIFO dataSet={ getDataSet }/>
+                    <Fragment>
+                        <FIFO dataSet={ getDataSet } />
+                        <SSTF dataSet={ getDataSet } />
+                        <CSCAN dataSet={ getDataSet } />
+                    </Fragment>
                 ) }
             </div>
             <style jsx>
@@ -87,12 +92,17 @@ const Home = () => {
                         }
 
                         .chart__container {
+                            width: 100%;
                             max-width: 1200px;
 
                             display: grid;
                             place-items: center;
 
                             margin: 100px auto 0 auto;
+                        }
+
+                        .chart__content {
+                            height: 100%;
                         }
 
                         .title {
